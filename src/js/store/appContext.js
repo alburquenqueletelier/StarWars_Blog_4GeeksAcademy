@@ -31,6 +31,22 @@ const injectContext = PassedComponent => {
 			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
 			 *
 			 **/
+			// state.actions.loadApiRoutes("https://www.swapi.tech/api");
+			const keysLocalStorage = Object.keys(localStorage);
+			if (keysLocalStorage.includes('people') && keysLocalStorage.includes('planets') && keysLocalStorage.includes('vehicles')){
+				keysLocalStorage.forEach(item => {
+					state.actions.loadLocalData(item);
+				})	
+			} else {
+				state.actions.loadDataUrl("https://swapi.dev/api/people");
+				state.actions.loadDataUrl("https://swapi.dev/api/planets");
+				state.actions.loadDataUrl("https://swapi.dev/api/vehicles");
+			}
+			if (keysLocalStorage.includes('favs')){
+				JSON.parse(localStorage.getItem('favs')).forEach(item=>{
+					state.actions.setFav(item, true);
+				});
+			}
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
