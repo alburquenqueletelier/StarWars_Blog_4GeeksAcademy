@@ -22,7 +22,7 @@ export const Favs = () => {
 			<h1 className="text-center text-danger">Personajes</h1>
 			<div className="row">
                 {actions.displayFav('people').map((item, index) => {
-                    return <People key={index} name={item.name} gender={item.gender} hair_color={item.hair_color} eye_color={item.eye_color} url={item.url}/>
+                    return <People key={index} name={item.name} gender={item.gender} hair_color={item.hair_color} eye_color={item.eye_color} url={item.url} image={"https://starwars-visualguide.com/assets/img/characters/" + item.url.match(/(\d+)/)[0] + ".jpg"}/>
                 })
 
                 }
@@ -35,7 +35,7 @@ export const Favs = () => {
 			<h1 className="text-center text-danger">Planetas</h1>
 			<div className="row">
                 {actions.displayFav('planets').map((item, index) => {
-                    return <Planet key={index} name={item.name} diameter={item.diameter} climate={item.climate} population={item.population} url={item.url}/>
+                    return <Planet key={index} name={item.name} diameter={item.diameter} climate={item.climate} population={item.population} url={item.url} image={"https://starwars-visualguide.com/assets/img/planets/" + item.url.match(/(\d+)/)[0] + ".jpg"}/>
                 })
 
                 }
@@ -48,7 +48,7 @@ export const Favs = () => {
 			<h1 className="text-center text-danger">Vehiculos</h1>
 			<div className="row">
                 {actions.displayFav('vehicles').map((item, index) => {
-                    return <Vehicle key={index} name={item.name} model={item.model} passengers={item.passengers} cost_in_credits={item.cost_in_credits} url={item.url}/>
+                    return <Vehicle key={index} name={item.name} model={item.model} passengers={item.passengers} cost_in_credits={item.cost_in_credits} url={item.url} image={"https://starwars-visualguide.com/assets/img/vehicles/" + item.url.match(/(\d+)/)[0] + ".jpg"}/>
                 })
 
                 }

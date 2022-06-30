@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setFav: (item, favorito) => {
 				const {favs} = getStore();
-				console.log(item);
+				// console.log(item);
 				if (favorito) {
 					console.log('pase por favorito = True');
 					favs.push(item);
@@ -93,17 +93,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let display = favs.filter(card => card.url.includes(type));
 				return display;
 			},
-			// getAllDataNames: () => {
-			// 	const {allNames} = getStore();
-			// 	if (localStorage.getItem('allNames').length > 0) {
-			// 		JSON.parse(localStorage.getItem('allNames')).forEach(item=>{
-			// 			allNames.push(item);
-			// 		});
-			// 	} else {
-			// 		fetch("https://swapi.dev/api/people")
-			// 	}
-			// 	setStore({allNames});
-			// },
+			getAllDataNames: () => {
+				const {people, planets, vehicles, allNames} = getStore();
+				let allNames_ = [
+					...people.results.map((personaje) => personaje.name),
+					...planets.results.map((planet) => planet.name),
+					...vehicles.results.map((vehicle)=> vehicle.name)
+				]
+				setStore({allNames: allNames_});
+			},
 		}
 	};
 };

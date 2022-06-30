@@ -47,7 +47,12 @@ const injectContext = PassedComponent => {
 					state.actions.setFav(item, true);
 				});
 			}
+			state.actions.getAllDataNames();
 		}, []);
+		
+		useEffect(()=>{
+			localStorage.setItem('favs', JSON.stringify(state.store.favs));
+		},[state.store.favs])
 
 		// The initial value for the context is not null anymore, but the current state of this component,
 		// the context will now have a getStore, getActions and setStore functions available, because they were declared

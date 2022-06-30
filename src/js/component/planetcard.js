@@ -20,7 +20,7 @@ export const Planet = (props) => {
                     </ul>
                     <Link to={`detail/planet/${props.url.match(/(\d+)/)[0]}`} className="btn btn-primary">Details</Link>
                     {store?.favs.filter(fav=> fav.url === props.url).length > 0
-                    ? <button type="button" className="btn btn-danger ms-1" onClick={()=>setFav(props, false)}>Remove from Fav</button>
+                    ? <button type="button" className="btn btn-danger ms-1" onClick={()=>actions.setFav(props.url, false)}>Remove from Fav</button>
                     : <button type="button" className="btn btn-dark ms-1" onClick={()=>actions.setFav(props, true)}>Add To Fav</button>
                     }
                 </div>
