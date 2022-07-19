@@ -17,14 +17,21 @@ export const Paginado = (props) => {
                     </li>
                 }
                 {!!props.count &&
-                    actions.numberPage(props.count).map((item, index)=>{
-                        return <li className="page-item" key={index}>
-                            <button className="page-link" onClick={()=>actions.loadDataUrl("https://swapi.dev/api/"+props.type+"/?page="+item)}>{item}</button>
+                    actions.numberPage(props.count).map((item, index) => {
+                        return <li 
+                            className = {!!store[props.type].next ? 
+                                store[props.type].next.match(/(\d+)/)[0]-1 == item 
+                                ? "page-item active" 
+                                : "page-item"
+                            : Math.ceil(props.count/10) == item ? "page-item active" : "page-item"
+                            } 
+                            key={index}>
+                            <button className="page-link" onClick={() => actions.loadDataUrl("https://swapi.dev/api/" + props.type + "/?page=" + item)}>{item}</button>
                         </li>
                     })
                 }
 
-                {!!props.next 
+                {!!props.next
                     ? <li className="page-item">
                         <button className="page-link" onClick={() => actions.loadDataUrl(props.next)}>Next</button>
                     </li>

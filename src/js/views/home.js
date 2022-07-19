@@ -1,5 +1,5 @@
 import React, { useCallback, useContext } from "react";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import { People } from "../component/peoplecard";
 import { Planet } from "../component/planetcard";
@@ -14,20 +14,20 @@ export const Home = () => {
 	const match = (e) => {
 		let value = e.target.value;
 		// let allNames = store.allNames;
-		let {people, planets, vehicles} = store;
-		people.results.forEach(character=>{
-			if (character.name.toLowerCase() == value.toLowerCase()){
-				history.push("/detail/people/"+character.url.match(/(\d+)/)[0])
+		let { people, planets, vehicles } = store;
+		people.results.forEach(character => {
+			if (character.name.toLowerCase() == value.toLowerCase()) {
+				history.push("/detail/people/" + character.url.match(/(\d+)/)[0])
 			}
 		})
-		planets.results.forEach(planet=>{
-			if (planet.name.toLowerCase() == value.toLowerCase()){
-				history.push("/detail/planet/"+planet.url.match(/(\d+)/)[0])
+		planets.results.forEach(planet => {
+			if (planet.name.toLowerCase() == value.toLowerCase()) {
+				history.push("/detail/planet/" + planet.url.match(/(\d+)/)[0])
 			}
 		})
-		vehicles.results.forEach(vehicle=>{
-			if (vehicle.name.toLowerCase() == value.toLowerCase()){
-				history.push("/detail/vehicle/"+vehicle.url.match(/(\d+)/)[0])
+		vehicles.results.forEach(vehicle => {
+			if (vehicle.name.toLowerCase() == value.toLowerCase()) {
+				history.push("/detail/vehicle/" + vehicle.url.match(/(\d+)/)[0])
 			}
 		})
 		// allNames.forEach(name=> {
@@ -36,7 +36,7 @@ export const Home = () => {
 		// 			people.name ==
 		// 		})
 		// 		history.push("/detail/")
-    
+
 		// 	}
 		// })
 	}
@@ -50,7 +50,7 @@ export const Home = () => {
 					<label className="text-secondary" htmlFor="browser">Choose your browser from the list:</label>
 				</div>
 				<div className="col-auto">
-					<input list="browsers" name="browser" id="browser" placeholder="Escribe lo que deseas buscar" onChange={(e)=>match(e)}/>
+					<input list="browsers" name="browser" id="browser" placeholder="Escribe lo que deseas buscar" onChange={(e) => match(e)} />
 					<datalist id="browsers">
 						{!!store.allNames &&
 							store.allNames.map((item, index) => {
@@ -71,6 +71,9 @@ export const Home = () => {
 					</h2>
 					<div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
 						<div className="accordion-body">
+							<div className="row  my-3">
+								<Paginado previous={store.people?.previous} next={store.people?.next} type="people" count={store.people?.count} />
+							</div>
 
 							<div className="row">
 								{!!store.people &&
@@ -96,6 +99,9 @@ export const Home = () => {
 					</h2>
 					<div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo">
 						<div className="accordion-body">
+							<div className="row my-3">
+								<Paginado previous={store.planets?.previous} next={store.planets?.next} type="planets" count={store.planets?.count} />
+							</div>
 							<div className="row">
 								{!!store.planets &&
 									store.planets.results.map((item, index) => {
@@ -117,6 +123,9 @@ export const Home = () => {
 					</h2>
 					<div id="collapseTres" className="accordion-collapse collapse" aria-labelledby="headingTres">
 						<div className="accordion-body">
+							<div className="row  my-3">
+								<Paginado previous={store.vehicles?.previous} next={store.vehicles?.next} type="vehicles" count={store.vehicles?.count} />
+							</div>
 							<div className="row">
 								{!!store.vehicles &&
 									store.vehicles.results.map((item, index) => {

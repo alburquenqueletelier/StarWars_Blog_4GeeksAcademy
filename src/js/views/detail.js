@@ -1,3 +1,4 @@
+import { element } from "prop-types";
 import React, { useEffect, useContext, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -24,7 +25,7 @@ export const Detail = () => {
                     {type === 'people'
                         ? <img src={"https://starwars-visualguide.com/assets/img/characters/" + id + ".jpg"} alt="http://via.placeholder.com/240x240" />
                         : type === 'planet' ? <img src={"https://starwars-visualguide.com/assets/img/planets/" + id + ".jpg"} alt="http://via.placeholder.com/240x240" />
-                            : <img src={"https://starwars-visualguide.com/assets/img/vehicles/" + id + ".jpg"} alt="http://via.placeholder.com/240x240" />
+                        : <img src={"https://starwars-visualguide.com/assets/img/vehicles/" + id + ".jpg"} alt="http://via.placeholder.com/240x240" />
                     }
                 </div>
                 <div className="col-4">
@@ -35,11 +36,16 @@ export const Detail = () => {
                                     Array.isArray(store.detail[item])
                                         ?
                                         store.detail[item].map((arr, indexArr) => {
-                                            return <li key={indexArr} className="list-group-item"><strong>{item + indexArr}</strong>: &nbsp; {arr}</li>
+                                            return <li key={indexArr} className="list-group-item"><strong>{item}</strong>: &nbsp; {store.films?.results.filter(element => element['url'] == arr).map(item => item['title'])}</li>
+                                            // return <li key={indexArr} className="list-group-item"><strong>{item}</strong>: &nbsp; {arr}</li>
                                         })
 
 
-                                        : <li key={index} className="list-group-item"><strong>{item}</strong>: &nbsp;{store.detail[item].length > 0 ? store.detail[item] : "Unkown"}</li>
+                                        : <li key={index} className="list-group-item"><strong>{item}</strong>: &nbsp;{
+                                            store.detail[item].length > 0 
+                                            ? item == 'homeworld' ? store.planets?.results.filter(element => element['url'] == store.detail[item]).map(item => item['name']) : store.detail[item]
+                                            : "Unkown"
+                                            }</li>
 
                                 )
                                 // return <li key={index} className="list-group-item"><strong>{item}</strong>: &nbsp;{store.detail[item].length > 0 ? store.detail[item] : "Unkown"}</li>

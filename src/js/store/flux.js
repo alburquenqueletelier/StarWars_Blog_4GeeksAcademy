@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			planets: null,
 			vehicles: null,
 			detail: null,
+			films: null,
 			favs: [],
 			allNames: [],
 		},
@@ -35,6 +36,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem('vehicles', JSON.stringify(data));					
 						return setStore({vehicles: data});
 					}
+					if (url.includes('films')){
+						localStorage.setItem('films', JSON.stringify(data));					
+						return setStore({films: data});
+					}
 				})
 				.catch(error=>console.log('error'))
 			},
@@ -44,6 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (data == 'people') return setStore({people:dataLoad});
 				if (data == 'planets') return setStore({planets:dataLoad});
 				if (data == 'vehicles') return setStore({vehicles:dataLoad});
+				if (data == 'films') return setStore({films:dataLoad});
 			},
 			loadDetail: (id, type) => {
 				let urlToLoad = null;

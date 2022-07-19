@@ -22,18 +22,8 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only runs once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
-			 * store, instead use actions, like this:
-			 *
-			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
-			 *
-			 **/
-			// state.actions.loadApiRoutes("https://www.swapi.tech/api");
 			const keysLocalStorage = Object.keys(localStorage);
-			if (keysLocalStorage.includes('people') && keysLocalStorage.includes('planets') && keysLocalStorage.includes('vehicles')){
+			if (keysLocalStorage.includes('people') && keysLocalStorage.includes('planets') && keysLocalStorage.includes('vehicles') && keysLocalStorage.includes('films')){
 				keysLocalStorage.forEach(item => {
 					state.actions.loadLocalData(item);
 				})	
@@ -41,6 +31,7 @@ const injectContext = PassedComponent => {
 				state.actions.loadDataUrl("https://swapi.dev/api/people");
 				state.actions.loadDataUrl("https://swapi.dev/api/planets");
 				state.actions.loadDataUrl("https://swapi.dev/api/vehicles");
+				state.actions.loadDataUrl("https://swapi.dev/api/films");
 			}
 			if (keysLocalStorage.includes('favs')){
 				JSON.parse(localStorage.getItem('favs')).forEach(item=>{
@@ -53,6 +44,10 @@ const injectContext = PassedComponent => {
 		useEffect(()=>{
 			localStorage.setItem('favs', JSON.stringify(state.store.favs));
 		},[state.store.favs])
+
+		useEffect(()=>{
+			state.actions.getAllDataNames();
+		},[state.store.people, state.store.planets, state.store.vehicles])
 
 		// The initial value for the context is not null anymore, but the current state of this component,
 		// the context will now have a getStore, getActions and setStore functions available, because they were declared
