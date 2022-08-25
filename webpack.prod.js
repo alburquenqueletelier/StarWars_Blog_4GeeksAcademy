@@ -1,7 +1,7 @@
 const {merge} = require('webpack-merge');
-const Common = require('./webpack.common.js');
+const common = require('./webpack.common.js');
 const Dotenv = require('dotenv-webpack');
-module.exports = merge(Common, {
+module.exports = merge(common, {
     mode: 'production',
     output: {
         publicPath: './'
